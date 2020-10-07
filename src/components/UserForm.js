@@ -1,40 +1,92 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+
+
+const initialState = {
+    email: '',
+    password: '',
+    emailError: '',
+    passwordError:''
+}
 
 export default class UserForm extends Component {
-    state ={
-        firstName: '',
-        lastName: '',
+    state = initialState;
+
+    validate = () => {
+        let emailError = "";
+        let passwordError = "";
+
+        if(this.state.password.length < 8 && this.state.password.length === 0 ){
+            passwordError = "Minimum 9 characters required ";
+        }
+
+        if (!this.state.email.includes('@') ){
+            emailError = 'Invalid email';
+        }
+
+        if (emailError || passwordError) {
+            this.setState({ emailError, passwordError });
+            return false;
+        }
+
+        return true;
     };
+
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const {firstName, lastName} = this.state;
+        const isValid = this.validate();
+        if (isValid){
+            this.props.setLoggedStatus(true);
+            
+            this.setState(initialState);
+        }
 
-        alert(`The form is submited. First name is: ${firstName} and Last name is: ${lastName}`);
+        
+
+        
+        
     };
 
-    handleFirstNameChange = (event) => {
+
+    handleEmailChange = (event) => {
         this.setState({
-            firstName: event.target.value,
+            email: event.target.value,
         });
 
     };
 
-    handleLastNameChange = (event) => {
+
+    handlePasswordChange = (event) => {
         this.setState({
-            lastName: event.target.value,
+            password: event.target.value,
         });
 
     };
 
 
     render() {
-        const {firstName, lastName } = this.state;
+        const {email, password } = this.state;
         return (
-            <form onSubmit={this.handleSubmit}> 
-                <input type="text" placeholder="First Name" value ={firstName} onChange={this.handleFirstNameChange}/>
-                <input type="text" placeholder="Last Name" value={lastName} onChange={this.handleLastNameChange}/>
-                <button type="submit">Submit</button>
+            <form onSubmit={this.handleSubmit} className="forma"> 
+               <span className="spanEmail">Email</span> 
+               <input type="email" 
+               placeholder="Enter your email" 
+               value ={email} 
+               onChange={this.handleEmailChange}
+               className="inputEmail"/>
+
+        <div className="email">{this.state.emailError}</div>
+
+               <span className="spanPassword">Password</span> 
+               <input type="password" 
+               placeholder="Enter your password" 
+               value={password} 
+               onChange={this.handlePasswordChange}
+               className="inputPassword"/>
+
+        <div className="password">{this.state.passwordError}</div>
+
+                <button type="submit"  >Submit</button>
             </form>
 
         )

@@ -1,21 +1,35 @@
 import React, { Component } from 'react'
 import './App.css';
 import UserForm from './components/UserForm';
-import RefsExample from './components/RefsExample';
-import RefComponent from './components/RefComponent';
-import UserFormUncontrolled from './components/UserFormUncontrolled';
+import FavoriteMovies from './components/FavoriteMovies';
 
 export default class App extends Component {
+  state={
+    isLoggedIn: false,
+  }
+
+  setLoggedStatus = (value) => {
+    this.setState({
+      isLoggedIn: value,
+    })
+
+    
+  }
   render() {
-    return (
-      <div className="container">
-        <UserForm /> 
-        <RefsExample />
-        <RefComponent />
-        <UserFormUncontrolled />
-        
-      </div>
-    )
+    const {isLoggedIn} = this.state;
+
+    if(isLoggedIn) {
+      return <FavoriteMovies />;
+    }
+
+    return <UserForm setLoggedStatus={this.setLoggedStatus} className="UserForm" />;
+    
+
+
+
+    
+    
+   
   }
 }
 

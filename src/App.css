@@ -20,4 +20,55 @@ body{
 
 .container form input {
   margin-bottom: 1rem;
+  width:230px;
+  height:20px;
+  outline: none;
+}
+
+.email{
+  margin-bottom: 1rem;
+    margin-top: -17px;
+    font-size: 15px;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+
+}
+
+.password{
+  margin-bottom: 1rem;
+    margin-top: -17px;
+    color: red;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+
+}
+
+.forma {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.spanEmail {
+  padding-right: 138px;
+
+}
+
+.spanPassword {
+  padding-right: 110px;
+
+}
+
+.inputEmail {
+  margin-bottom:1rem;
+  outline: none;
+}
+
+.inputPassword {
+  margin-bottom:1rem;
+  outline: none;
 }
